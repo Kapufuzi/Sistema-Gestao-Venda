@@ -137,7 +137,9 @@ export class SalesComponent implements OnInit{
       salePrice: this.toOrder?.salePrice
     }
 
-    if (this.toOrder && this.toOrder.onTheShelf >= Number(selected?.quantity)) {
+    // onTheShelf
+
+    if (this.toOrder && this.toOrder.quantityInStock >= Number(selected?.quantity)) {
       this.productListOrder.push(selected)
 
       const totals = this.productListOrder.reduce(
@@ -156,7 +158,7 @@ export class SalesComponent implements OnInit{
       this.createSalesForm()
     } else {
 
-        this.toastr.error(`Quantidade em estoque insuficiente! ${this.toOrder.onTheShelf}`, "", {
+        this.toastr.error(`Quantidade em estoque insuficiente! ${this.toOrder.quantityInStock}`, "", {
           timeOut: 5000,
           progressBar: true,
           progressAnimation: "increasing",
@@ -204,7 +206,7 @@ export class SalesComponent implements OnInit{
       this.productListOrder.forEach(res => {
         this.products.map(prod => {
           if (prod.id == res.id) {
-            prod.onTheShelf = prod.onTheShelf - res.quantity
+            prod.quantityInStock = prod.quantityInStock - res.quantity
             this.productService.updateProduct(`${prod.id}`, prod)
           }
         })

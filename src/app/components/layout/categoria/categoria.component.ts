@@ -173,7 +173,7 @@ export class CategoriaComponent implements OnInit{
       quantityInStock: [data?.quantityInStock || "", Validators.required],
       minimumStock: [data?.minimumStock || "", Validators.required],
       maximumStock: [data?.maximumStock || "", Validators.required],
-      onTheShelf: [data?.onTheShelf || "", [Validators.required, this.integerValidator]],
+      onTheShelf: [data?.onTheShelf || ""],
       expirationDate: [data?.expirationDate ? this.formatDate(data.expirationDate) : "", Validators.required],
       manufacturingDate: [data?.manufacturingDate ? this.formatDate(data.manufacturingDate) : "", Validators.required],
       category: [data?.category || "", Validators.required],
