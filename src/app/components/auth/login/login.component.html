@@ -1,0 +1,36 @@
+<div style="display: flex;justify-content: center;align-items: center;flex-direction: column;height: 100%;">
+    <div class="card">
+        <p-card header="Login" subheader="User authentication" [style]="{ width: '360px' }" [formGroup]="loginForm">
+            <!-- <form [formGroup]="loginForm"> -->
+
+                <ng-template pTemplate="header">
+                    <img alt="Card" src="https://primefaces.org/cdn/primeng/images/usercard.png" />
+                </ng-template>
+                <ng-template pTemplate="content">
+                
+                    <div class="flex">
+                        <span class="p-input-icon-left" style="width: 100% !important;margin-bottom: 5px;">
+                            <i class="pi pi-user"></i>
+                            <input type="text" formControlName="email" pInputText style="width: 100% !important;" placeholder="Email" />
+                        </span>
+                    </div>
+                
+                    <div class="flex">
+                        <p-password formControlName="password" [toggleMask]="true" [style]="{ 'width': '100%' }"></p-password>
+                    </div>
+                
+                </ng-template>
+                
+                <ng-template pTemplate="footer">
+                    <p-button label="Enter" icon="pi pi-check" class="me-2" (click)="loginWithEmailPassword()"></p-button>
+                    <p-button label="Google">
+                        <img style="width: 1rem;height: 1rem;margin-right: 3px;"
+                            src="https://img.icons8.com/cute-clipart/64/000000/google-logo.png" alt="">
+                    </p-button>
+                </ng-template>
+
+            <!-- </form> -->
+        </p-card>
+    </div>
+
+</div>

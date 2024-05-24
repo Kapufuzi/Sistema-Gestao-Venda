@@ -1,0 +1,84 @@
+<div class="card" style="height: 100vh;display: flex;flex-direction: column;align-items: center;">
+    <div style="height: 9.5%;width: 100%;margin-bottom: 37px;">
+        <p-toolbar>
+            
+            <ng-template pTemplate="start">
+                <div style="width: 14.7rem;display: flex;justify-content: space-between;align-items: center;">
+                    <div>
+                        <img src="https://primefaces.org/cdn/primeng/images/primeng.svg" />
+                    </div>
+                    <div>
+                        <button class="p-link">
+                            <i class="pi pi-bars text-2xl" style="color: rgba(0, 0, 0, 0.5);font-size: 32px;"
+                                (click)="drawer.toggle()"></i>
+                        </button>
+                    </div>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="end">
+                <div style="display: flex;align-items: center;justify-content: space-between;">
+                    @if (dataUser && dataUser.photo) {
+                        <p-avatar image='{{dataUser.photo}}' shape="circle" class="me-2"
+                            [matMenuTriggerFor]="menu" />
+                    }@else {
+                        <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png" shape="circle" class="me-2" [matMenuTriggerFor]="menu"/>
+                    }
+                    @if (dataUser) {
+                      <span class="font-bold text-bluegray-50"> {{dataUser.name}}</span>
+                    }
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item>Perfil</button>
+                        <button mat-menu-item (click)="logout()">Sair</button>
+                    </mat-menu>
+
+                </div>
+            </ng-template>
+        </p-toolbar>
+    </div>
+
+    <div style="height: 83.3%;width: 95%;">
+        <mat-drawer-container class="example-container" autosize>
+            <mat-drawer #drawer class="example-sidenav" mode="side" [opened]="true"
+                [style]="{ 'border-radius': '0.5rem'}">
+
+                <div class="d-flex flex-row align-items-center mb-3">
+                    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="production_quantity_limits"></mat-icon>
+                    <button mat-button [matMenuTriggerFor]="product">Produtos</button>
+                    <mat-menu #product="matMenu">
+                        <button mat-menu-item [routerLink]="'/product'">Registar</button>
+                        <button mat-menu-item [routerLink]="'/product/list'">Listar</button>
+                    </mat-menu>
+                </div>
+
+
+                <div class="d-flex flex-row align-items-center mb-3">
+                    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="badge"></mat-icon>
+                    <button mat-button [matMenuTriggerFor]="employee">Funcionários</button>
+                    <mat-menu #employee="matMenu">
+                        <button mat-menu-item [routerLink]="'/employee'">Registar</button>
+                        <button mat-menu-item [routerLink]="'/employee/list'">Listar</button>
+                    </mat-menu>
+                </div>
+
+
+                <div class="d-flex flex-row align-items-center mb-3">
+                    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="point_of_sale"></mat-icon>
+                    <button mat-button [matMenuTriggerFor]="sale">Vendas</button>
+                    <mat-menu #sale="matMenu">
+                        <button mat-menu-item [routerLink]="'/sales'">Registar</button>
+                        <button mat-menu-item [routerLink]="'/sales/list'">Listar</button>
+                    </mat-menu>
+                </div>
+
+            </mat-drawer>
+
+            <div class="example-sidenav-content">
+                <router-outlet></router-outlet>
+            </div>
+
+        </mat-drawer-container>
+    </div>
+
+
+
+</div>

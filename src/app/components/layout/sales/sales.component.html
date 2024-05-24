@@ -1,0 +1,149 @@
+<div class="d-flex flex-row justify-content-between" style="width: 80vw;">
+
+    <div class="sales-container">
+        <h1 class="title">Registro de Vendas</h1>
+
+        <div class="sales-form">
+            <mat-form-field appearance="fill">
+                <mat-label>Produto</mat-label>
+                <input type="text" matInput [formControl]="myControl" [matAutocomplete]="auto">
+                <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                    @for (option of filteredOptions | async; track option) {
+                    <mat-option [value]="option" (click)="onOptionSelected(option)">{{option.productCode}}</mat-option>
+                    }
+                </mat-autocomplete> 
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Quantidade</mat-label>
+                <input matInput type="number" [(ngModel)]="quantity">
+            </mat-form-field>
+
+            <button mat-flat-button color="primary" (click)="addToCart()">Adicionar Produto</button>
+            <!-- <button mat-raised-button color="primary" (click)="onSell()">Vender</button> -->
+        </div>
+    </div>
+
+    <div>
+
+        <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Nome</th>
+                <td mat-cell *matCellDef="let product">{{ product.productName }}</td>
+            </ng-container>
+            <!-- Quantity Column -->
+            <ng-container matColumnDef="quantityInStock">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Quantidade</th>
+                <td mat-cell *matCellDef="let product">{{ product.quantity }}</td>
+            </ng-container>
+
+                <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef>Acção</th>
+                    <td mat-cell *matCellDef="let product">
+                        <button mat-button color="warn" (click)="deleteProduct(product.id)">
+                            <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="delete"></mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+
+            <!-- Table Header and Row Declarations -->
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+        @if (dataSource) {
+
+            <div class="d-flex flex-row justify-content-center mt-4">
+
+                <mat-form-field appearance="fill" class="me-2">
+                    <mat-label>Total a Pagar</mat-label>
+                    <input matInput disabled [value]="totalPrice">
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" class="me-2">
+                    <mat-label>Valor</mat-label>
+                    <input matInput type="number" min="0" (blur)="makeChange($event)">
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>Troco</mat-label>
+                    <input matInput disabled [value]="change">
+                </mat-form-field>
+            </div>
+
+            @if (validetSale) {
+                <div class="d-flex flex-row justify-content-center mt-4">
+                    <button mat-flat-button color="primary" (click)="onSell()" printSectionId="faturaParaImprimir" ngxPrint>Registar venda</button>
+                </div>
+            }
+
+        }
+
+        
+    </div>
+
+</div>
+
+
+
+<!-- fatura.component.html -->
+<div id="faturaParaImprimir" style="display: none;">
+    <div class="fatura-cabecalho">
+        <p><strong>NARUKI-KIAKU-PRESTAÇÃO DE SERVIÇOS, LDA</strong></p>
+        <p>NIF: 5000856371</p>
+        <p>Tel: 927064331 / 923867058</p>
+        <p>ZANGO 2 - RUA DO HOSPITAL DA CASA AMARELA</p>
+        <p>Luanda/Angola</p>
+    </div>
+
+    <hr>
+
+    <div class="fatura-detalhes">
+        <!-- <p><strong>FACTURA RECIBO FR IGFA 2024/18731</strong></p><p><strong>FACTURA RECIBO FR IGFA 2024/18731</strong></p> -->
+        <p>Data: 2024-05-19 &nbsp;&nbsp;&nbsp; 13:23</p>
+        <!-- <p>Cliente: Consumidor Final</p>
+        <p>NIF: Desconhecido</p> -->
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>DESIG</th>
+                <th>QTD</th>
+                <th>PU</th>
+                <th>PT</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let produto of productListOrder">
+                <td>{{ produto.productName }}</td>
+                <td>{{ produto.quantity }}</td>
+                <td>{{ produto.salePrice | currency : "KZ " }}</td>
+                <td>{{ (produto.quantity * produto.salePrice) | currency : "KZ " }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="fatura-total">
+        <p>Valor Bruto: {{totalPrice}}</p>
+        <p>Desconto: 0.00</p>
+        <!-- <p>IVA: 0.00</p> -->
+        <p><strong>Total Factura: {{totalPrice}}</strong></p>
+        <!-- <p>Dois Mil e Cem Kwanzas</p> -->
+    </div>
+
+    <div class="fatura-pagamento">
+        <p>Pagamento: Em Dinheiro &nbsp;&nbsp;&nbsp; Entrega: {{moneyGived}}</p>
+        <p>Troco: {{change}} </p>
+            <!-- &nbsp;&nbsp;&nbsp; Valor TPA: 0.00</p> -->
+        <!-- <p>Valor Mão: 0.00</p> -->
+    </div>
+
+    <div class="fatura-rodape">
+        <p>Operador(a): {{dataUser?.name}}</p>
+        <!-- <p>Processado por programa validado N.º 272/AGT/2020</p>
+        <p>IGIFA GESTÃO COMERCIAL V8.01</p>
+        <p>Bens colocados à disposição do adquirente na data do documento. Local de carga: Sede Data: 2024-05-19</p>
+        <p>COORDENADAS BANCARIAS</p> -->
+    </div>
+</div>
