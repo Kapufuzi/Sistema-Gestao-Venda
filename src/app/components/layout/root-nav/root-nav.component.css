@@ -1,0 +1,24 @@
+.example-container {
+    width: 100%;
+    height: 100%;
+    background: none;
+}
+
+.example-sidenav-content {
+    display: flex;
+    height: 100%;
+    /* padding: 25px; */
+    background: #ffffff;
+    border-radius: 15px;
+    margin-left: 25px;
+    /* border: 1px solid #ebeaea; */
+}
+
+.example-sidenav {
+    width: 12%;
+    padding: 20px;
+    border: 1px solid #ebeaea;
+    box-shadow: -22px 0px 59px -3px rgba(235, 234, 234, 1);
+    /* border-right: none; */
+    /* background: #4e5b6cc0; */
+}

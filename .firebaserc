@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "admin-2a4d2": {
+      "hosting": {
+        "admin": [
+          "admin-2a4d2"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "admin-2a4d2"
+  }
+}

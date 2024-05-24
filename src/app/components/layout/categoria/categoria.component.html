@@ -1,0 +1,98 @@
+
+<div class="">
+<form class="row g-3" [formGroup]="productForm">
+
+    <div class="card" style="width: 98%;">
+        <div class="card-body">
+            <h5 class="card-title">Informações Básicas</h5>
+            <div class="row mb-3">
+
+                <div class="col-md-4 mb-3">
+                    <label for="inputEmail4" class="form-label">Nome do Produto</label>
+                    <input type="text" class="form-control" formControlName="productName">
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="inputPassword4" class="form-label">Código do Produto</label>
+                    <input type="text" class="form-control" formControlName="productCode">
+                </div>
+
+                <div class="col-4 mb-3">
+                    <label for="inputAddress" class="form-label">Preço de Venda</label>
+                    <input type="number" class="form-control" formControlName="salePrice">
+                </div>
+
+                <div class="col-3 mb-3">
+                    <label for="inputAddress2" class="form-label">Preço de Custo</label>
+                    <input type="number" class="form-control" formControlName="costPrice">
+                </div>
+
+                <div class="col-md-3 mb-3">
+                    <label for="inputCity" class="form-label">Impostos</label>
+                    <input type="number" class="form-control" formControlName="taxes">
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label for="inputCity" class="form-label">Quantidade em Estoque</label>
+                    <input type="number" class="form-control" formControlName="quantityInStock">
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label for="inputCity" class="form-label">Estoque Mínimo</label>
+                    <input type="number" class="form-control" formControlName="minimumStock">
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label for="inputCity" class="form-label">Estoque Máximo</label>
+                    <input type="number" class="form-control" formControlName="maximumStock">
+                </div>
+
+                <div class="col-md-3 mb-3">
+                    <label for="inputCity" class="form-label">Qtd. em Prateleira</label>
+                    <input type="number" class="form-control" formControlName="onTheShelf" (input)="calculateStock()">
+                </div>
+
+            </div>
+ 
+            <div class="row">
+                <div class="row">
+                    <div class="card" style="width: 50%">
+                        <div class="card-body">
+                            <h5 class="card-title">Informações Adicionais</h5>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="inputPassword4" class="form-label">Data de Fabricação</label>
+                                    <input type="date" class="form-control" formControlName="manufacturingDate">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="inputEmail4" class="form-label">Data de Validade</label>
+                                    <input type="date" class="form-control" formControlName="expirationDate">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <p-dropdown [options]="categoriasDeProdutos" placeholder="Selecione a categoria" [group]="true" formControlName="category">
+                            <ng-template let-group pTemplate="group">
+                                <div class="flex align-items-center">
+                                    <img src="https://primefaces.org/cdn/primeng/images/demo/flag/flag_placeholder.png"
+                                        [class]="'mr-2 flag flag-' + group.value" style="width: 40px" />
+                                    <span>{{ group.label }}</span>
+                                </div>
+                            </ng-template>
+                        </p-dropdown>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            @if (paramsID) {
+                <button class="btn btn-primary me-md-2" type="button" (click)="onSubmit()" [disabled]="productForm.invalid">Atualizar</button>
+            }@else {
+                <button class="btn btn-primary me-md-2" type="button" (click)="onSubmit()" [disabled]="productForm.invalid">Registar</button>
+            }
+            <button class="btn btn-secondary" type="button">Cancelar</button>
+        </div>
+    </div>
+</form>
+</div>
+
+
