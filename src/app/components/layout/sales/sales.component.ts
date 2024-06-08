@@ -176,8 +176,23 @@ export class SalesComponent implements OnInit{
 
 
   displayFn(product: Product): string {
-    return product && product.productName ? product.productName : '';
+    return product && product.productCode ? product.productCode : '';
   }
+selectedProduct: any
+    onBarcodeInput(event: KeyboardEvent) {
+        if (event.key === 'Enter') {
+            const inputElement = event.target as HTMLInputElement;
+            const barcode = inputElement.value;
+            const foundProduct = this.products.find(product => product.productCode === barcode);
+            if (foundProduct) {
+                this.myControl.setValue(foundProduct);
+                this.selectedProduct = foundProduct;
+            } else {
+                alert('Produto não encontrado');
+            }
+            inputElement.value = ''; // Limpa o campo após a leitura do código de barras
+        }
+    }
 
   private _filter(name: string): Product[] {
     const filterValue = name.toLowerCase();

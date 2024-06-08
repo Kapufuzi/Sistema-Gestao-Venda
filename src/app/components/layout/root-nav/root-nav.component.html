@@ -41,24 +41,32 @@
             <mat-drawer #drawer class="example-sidenav" mode="side" [opened]="true"
                 [style]="{ 'border-radius': '0.5rem'}">
 
-                <div class="d-flex flex-row align-items-center mb-3">
-                    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="production_quantity_limits"></mat-icon>
-                    <button mat-button [matMenuTriggerFor]="product">Produtos</button>
-                    <mat-menu #product="matMenu">
-                        <button mat-menu-item [routerLink]="'/product'">Registar</button>
-                        <button mat-menu-item [routerLink]="'/product/list'">Listar</button>
-                    </mat-menu>
-                </div>
+                @if (dataUser?.role == "admin") {
+                    <div class="d-flex flex-row align-items-center mb-3">
+                        <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="badge"></mat-icon>
+                        <button mat-button [routerLink]="''"> DashBoard</button>
+                    </div>
+
+                    <div class="d-flex flex-row align-items-center mb-3">
+                        <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="production_quantity_limits"></mat-icon>
+                        <button mat-button [matMenuTriggerFor]="product">Produtos</button>
+                        <mat-menu #product="matMenu">
+                            <button mat-menu-item [routerLink]="'/product'">Registar</button>
+                            <button mat-menu-item [routerLink]="'/product/list'">Listar</button>
+                        </mat-menu>
+                    </div>
+
+                }
 
 
-                <div class="d-flex flex-row align-items-center mb-3">
+                <!-- <div class="d-flex flex-row align-items-center mb-3">
                     <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="badge"></mat-icon>
                     <button mat-button [matMenuTriggerFor]="employee">Funcionários</button>
                     <mat-menu #employee="matMenu">
                         <button mat-menu-item [routerLink]="'/employee'">Registar</button>
                         <button mat-menu-item [routerLink]="'/employee/list'">Listar</button>
                     </mat-menu>
-                </div>
+                </div> -->
 
 
                 <div class="d-flex flex-row align-items-center mb-3">

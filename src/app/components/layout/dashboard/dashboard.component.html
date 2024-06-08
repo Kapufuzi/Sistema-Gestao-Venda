@@ -1,1 +1,48 @@
-<p>dashboard works!</p>
+<mat-toolbar color="primary">
+    <span>Dashboard de Vendas</span>
+</mat-toolbar>
+
+<div class="dashboard-container">
+    <mat-card class="dashboard-card">
+        <mat-card-header>
+            <mat-card-title>Produtos Mais Vendidos do Dia</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <ngx-charts-bar-vertical [view]="[700, 400]" [scheme]="'vivid'" [results]="dailySalesChartData$ | async"
+                [xAxis]="true" [yAxis]="true" [legend]="true" [showXAxisLabel]="true" [showYAxisLabel]="true"
+                [xAxisLabel]="'Produto'" [yAxisLabel]="'Quantidade'">
+            </ngx-charts-bar-vertical>
+            <mat-list>
+                <mat-list-item *ngFor="let venda of vendasDiarias$ | async">
+                    {{ venda.productName }} - {{ venda.quantity }} unidades
+                </mat-list-item>
+            </mat-list>
+        </mat-card-content>
+    </mat-card>
+
+    <mat-card class="dashboard-card">
+        <mat-card-header>
+            <mat-card-title>Produtos Mais Vendidos do Mês</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <ngx-charts-bar-vertical [view]="[700, 400]" [scheme]="'vivid'" [results]="monthlySalesChartData$ | async"
+                [xAxis]="true" [yAxis]="true" [legend]="true" [showXAxisLabel]="true" [showYAxisLabel]="true"
+                [xAxisLabel]="'Produto'" [yAxisLabel]="'Quantidade'">
+            </ngx-charts-bar-vertical>
+            <mat-list>
+                <mat-list-item *ngFor="let venda of vendasMensais$ | async">
+                    {{ venda.productName }} - {{ venda.quantity }} unidades
+                </mat-list-item>
+            </mat-list>
+        </mat-card-content>
+    </mat-card>
+
+    <mat-card class="dashboard-card">
+        <mat-card-header>
+            <mat-card-title>Total de Vendas do Mês</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <p>{{ totalMensal$ | async | currency:'KZ ' }}</p>
+        </mat-card-content>
+    </mat-card>
+</div>

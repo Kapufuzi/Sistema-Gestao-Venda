@@ -30,12 +30,10 @@ table {
 }
 
 
-@media print {
-/* fatura.component.css */
+/* @media print {
     #faturaParaImprimir {
         font-family: Arial, sans-serif;
         width: 80mm;
-        /* largura de uma típica impressão de fatura */
         padding: 10px;
     }
 
@@ -83,4 +81,65 @@ table {
          display: none;
     }
 
+} */
+
+
+@media print {
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    #faturaParaImprimir {
+        display: block;
+        width: 100%;
+        max-width: 210mm;
+        /* Ajustar para A4 */
+        height: 297mm;
+        /* Ajustar para A4 */
+        padding: 20mm;
+        /* Margem interna */
+        box-sizing: border-box;
+    }
+
+    .fatura-cabecalho,
+    .fatura-detalhes,
+    .fatura-total,
+    .fatura-pagamento,
+    .fatura-rodape {
+        margin: 0;
+        padding: 0;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th,
+    td {
+        padding: 5px;
+        text-align: left;
+    }
+
+    .fatura-total,
+    .fatura-pagamento,
+    .fatura-rodape {
+        page-break-inside: avoid;
+    }
+
+    .fatura-cabecalho p,
+    .fatura-detalhes p,
+    .fatura-total p,
+    .fatura-pagamento p,
+    .fatura-rodape p {
+        margin: 2px 0;
+        font-size: 12px;
+    }
+
+    hr {
+        margin: 5px 0;
+        border: 0;
+        border-top: 1px solid #000;
+    }
 }

@@ -3,5 +3,6 @@ export interface SalesHistory {
   product: Object;
   date: Date;
   price: number,
-  userName: string
+  userName: string,
+  id?: string
 }

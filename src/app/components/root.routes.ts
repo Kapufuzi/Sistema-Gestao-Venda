@@ -11,16 +11,16 @@ export const rootRoutes: Routes = [
         loadComponent: () => import('./../components/layout/dashboard/dashboard.component')
           .then(routes => routes.DashboardComponent)
       },
-      {
-        path: 'hospital',
-        loadChildren: () => import('./../components/layout/hospital/hospital.routes')
-          .then(routes => routes.hospitalRoutes)
-      },
-      {
-        path: 'employee',
-        loadChildren: () => import('./../components/layout/employee/employee.routes')
-          .then(routes => routes.employeeRoutes)
-      },
+      // {
+      //   path: 'hospital',
+      //   loadChildren: () => import('./../components/layout/hospital/hospital.routes')
+      //     .then(routes => routes.hospitalRoutes)
+      // },
+      // {
+      //   path: 'employee',
+      //   loadChildren: () => import('./../components/layout/employee/employee.routes')
+      //     .then(routes => routes.employeeRoutes)
+      // },
       {
         path: 'product',
         loadChildren: () => import('./../components/layout/categoria/category.routes')
