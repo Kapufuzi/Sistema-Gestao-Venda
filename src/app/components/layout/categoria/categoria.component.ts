@@ -307,7 +307,7 @@ export class CategoriaComponent implements OnInit{
 
   getProducts() {
     this.productService.getProducts().subscribe((products) => {
-      console.log('Products: ', products);
+      // console.log('Products: ', products);
     });
   }
 

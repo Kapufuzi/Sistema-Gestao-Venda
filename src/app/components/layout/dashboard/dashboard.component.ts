@@ -51,4 +51,6 @@ export class DashboardComponent implements OnInit {
       map(vendas => vendas.map(venda => ({ name: venda.productName, value: venda.quantity })))
     );
   }
+
+
 }
